@@ -9,18 +9,12 @@ const isProtectedRoute = createRouteMatcher([
     '/meeting(.*)',
 ])
 
-
-
 export default clerkMiddleware(async (auth, req) => {
     const { userId } = await auth()
-    const currentUrl = new URL(req.url);
-    console.log(currentUrl.pathname);
     if(!userId && isProtectedRoute(req)){
-        return NextResponse.redirect(new URL("/",req.url))
+        return NextResponse.redirect(new URL("/sign-in",req.url))
     }
-
   })
-
 
 export const config = {
   matcher: [

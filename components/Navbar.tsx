@@ -24,9 +24,9 @@ const Navbar = () => {
               <SignInButton />
             </div>
           </SignedOut>
-          {/* <SignedIn>
+          <SignedIn>
             <UserButton />
-          </SignedIn> */}
+          </SignedIn>
         <MobileNav />
       </div>
     </nav>

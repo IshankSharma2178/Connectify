@@ -1,29 +1,41 @@
-"use client"
-import MeetingRoom from '@/components/MeetingRoom'
-import MeetingSetup from '@/components/MeetingSetup'
-import { useUser } from '@clerk/nextjs'
-import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk'
-import React, { useState } from 'react'
+"use client";
 
-const Meeting = async ({params} : {params :{id:string}}) => {
-  const id = (await params).id
-  const {user , isLoaded} = useUser();
-  const [isSetUpComplete , setIsSetUpComplete]  = useState(false)
+import Loader from '@/components/Loader';
+import MeetingRoom from '@/components/MeetingRoom';
+import MeetingSetup from '@/components/MeetingSetup';
+import { useGetCallById } from '@/hooks/useGetCallById';
+import { useUser } from '@clerk/nextjs';
+import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
+import { useParams } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+
+const Meeting = () => {
+  const { id } = useParams();
+  const { user, isLoaded } = useUser();
+  const [isSetUpComplete, setIsSetUpComplete] = useState(false);  
+  const [meetingId, setMeetingId] = useState<string | null>(null);
+  const {call , isCallLoading} = useGetCallById(id);
+
+  if(!isLoaded || isCallLoading) return <Loader/>
+
+
+  if (!isLoaded) {
+    return <p>Loading user data...</p>;
+  }
 
   return (
-    <main className='h-screen w-full'>
-      <StreamCall>
+    <main className="h-screen w-full">
+      <StreamCall call={call}>
         <StreamTheme>
           {!isSetUpComplete ? (
-            <MeetingSetup/>
-          ):(
-            <MeetingRoom/>
-          )
-        }
+            <MeetingSetup setIsSetUpComplete={setIsSetUpComplete}/>
+          ) : (
+            <MeetingRoom  />
+          )}
         </StreamTheme>
       </StreamCall>
     </main>
-  )
-}
+  );
+};
 
-export default Meeting
+export default Meeting;

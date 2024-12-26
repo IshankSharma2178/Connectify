@@ -8,6 +8,7 @@ import { useUser } from '@clerk/nextjs';
 import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
 import { useParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 const Meeting = () => {
   const { id } = useParams();

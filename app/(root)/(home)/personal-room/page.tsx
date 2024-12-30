@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const PersonalRoom = () => {
-  return (
-    <div>PersonalRoom</div>
-  )
-}
+  return <div>PersonalRoom</div>;
+};
 
-export default PersonalRoom
+export default PersonalRoom;

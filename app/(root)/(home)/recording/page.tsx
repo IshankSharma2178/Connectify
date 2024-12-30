@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Recording = () => {
-  return (
-    <div>Recording</div>
-  )
-}
+  return <div>Recording</div>;
+};
 
-export default Recording
+export default Recording;

@@ -1,7 +1,12 @@
+import CallList from "@/components/CallList";
 import React from "react";
 
 const Upcoming = () => {
-  return <div>Upcoming</div>;
+  return (
+    <div>
+      <CallList type="upcoming" />
+    </div>
+  );
 };
 
 export default Upcoming;
